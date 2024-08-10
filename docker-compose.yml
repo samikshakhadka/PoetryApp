@@ -1,0 +1,25 @@
+services:
+  web:
+    build: .
+    command: python /app/manage.py runserver 0.0.0.0:8000
+    volumes:
+      - .:/app
+    ports:
+      - "8000:8000"
+    depends_on:
+      - db
+    env_file:
+      - .env
+  db:
+    # container_name: postgresdb
+    image: postgres:16-alpine
+    restart: always
+    volumes:
+      - postgres_data:/var/lib/postgresql/data/
+    environment:
+      - POSTGRES_HOST_AUTH_METHOD=trust
+      - POSTGRES_USER=sam
+      - POSTGRES_PASSWORD=1234567890
+      - POSTGRES_DB=poetry
+volumes:
+  postgres_data:
