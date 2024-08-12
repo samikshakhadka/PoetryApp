@@ -127,7 +127,7 @@ DATABASES = {
 }
 
 # Custom user model
-#AUTH_USER_MODEL = 'user.CustomUser'
+AUTH_USER_MODEL = 'user.CustomUser'
 
 
 

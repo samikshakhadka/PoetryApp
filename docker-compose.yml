@@ -18,9 +18,12 @@ services:
       - postgres_data:/var/lib/postgresql/data/
     environment:
       - POSTGRES_HOST_AUTH_METHOD=trust
-      - POSTGRES_USER=sam
-      - POSTGRES_PASSWORD=1234567890
-      - POSTGRES_DB=poetry
-      - POSTGRES_HOST = localhost
+      - POSTGRES_USER=${DJANGO_DB_USER}
+      - POSTGRES_PASSWORD=${DJANGO_DB_PASS}
+      - POSTGRES_DB=${DJANGO_DB_NAME}
+      
+
+    ports: 
+      - "5432:5432" 
 volumes:
   postgres_data:
