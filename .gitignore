@@ -1,2 +1,7 @@
 .env
-env/
+.pytest_cache
+user/__pycache__
+book/__pycache__
+config/__pycache__
+apps/user/tests/__pycache__
+apps/user/book/__pycache__/

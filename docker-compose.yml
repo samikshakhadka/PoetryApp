@@ -21,5 +21,6 @@ services:
       - POSTGRES_USER=sam
       - POSTGRES_PASSWORD=1234567890
       - POSTGRES_DB=poetry
+      - POSTGRES_HOST = localhost
 volumes:
   postgres_data:
