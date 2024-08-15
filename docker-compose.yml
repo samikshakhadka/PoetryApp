@@ -22,8 +22,37 @@ services:
       - POSTGRES_PASSWORD=${DJANGO_DB_PASS}
       - POSTGRES_DB=${DJANGO_DB_NAME}
       
-
     ports: 
       - "5432:5432" 
+
+    
+
+  redis:
+      image: redis
+      ports:
+        - "6379:6379"
+      volumes:
+        - ./redis.conf:/usr/local/etc/redis/redis.conf
+      command: redis-server /usr/local/etc/redis/redis.conf
+      restart: always
+
+
+  worker:
+      build:
+        context: .
+        dockerfile: Dockerfile
+      # image: madefire/chordtest
+      command: ['celery','-A', 'config', 'worker', '--loglevel', 'info']
+      # environment:
+      #   - BROKER_URL=redis://redis:6379/0
+      #   - RESULT_BACKEND=redis://redis:6379/0
+      #   - CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+      #   - C_FORCE_ROOT=true
+
+      depends_on:
+        - redis
+
+      restart: always
+
 volumes:
-  postgres_data:
+      postgres_data:

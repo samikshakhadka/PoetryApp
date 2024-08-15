@@ -70,7 +70,8 @@ DJANGO_APPS = [
 ]
 
 THIRD_PARTY_APPS = [
-
+    'rest_framework', 
+    'drf_yasg',
 ]
 
 LOCAL_APPS = [ 
@@ -110,6 +111,13 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
+# REST_FRAMEWORK = {
+#     # Use Django's standard `django.contrib.auth` permissions,
+#     # or allow read-only access for unauthenticated users.
+#     'DEFAULT_PERMISSION_CLASSES': [
+#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
+#     ]
+# }
 
 DATABASES = {
     'default': {
@@ -129,7 +137,15 @@ DATABASES = {
 # Custom user model
 AUTH_USER_MODEL = 'user.CustomUser'
 
-
+CACHES = {
+    "default": {
+        "BACKEND": "django_redis.cache.RedisCache",
+        "LOCATION": "redis://127.0.0.1:6379/1",
+        "OPTIONS": {
+            "CLIENT_CLASS": "django_redis.client.DefaultClient",
+        }
+    }
+}
 
 # Password validation
 # https://docs.djangoproject.com/en/5.0/ref/settings/#auth-password-validators
@@ -171,3 +187,23 @@ STATIC_URL = 'static/'
 # https://docs.djangoproject.com/en/5.0/ref/settings/#default-auto-field
 
 DEFAULT_AUTO_FIELD = 'django.db.models.BigAutoField'
+
+CELERY_BROKER_URL = 'redis://redis:6379/0' #'redis://localhost:6379/0'
+CELERY_RESULT_BACKEND = 'redis://redis:6379/0' #'redis://localhost:6379/0'
+CELERY_ACCEPT_CONTENT = ['json']
+CELERY_TASK_SERIALIZER = 'json'
+CELERY_RESULT_SERIALIZER = 'json'
+CELERY_TIMEZONE = 'UTC'
+CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
+
+# Email settings
+# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+EMAIL_HOST = 'smtp.gmail.com'
+#env('EMAIL_HOST', default='smtp.smartattendance64@gmail.com')
+EMAIL_PORT = env('EMAIL_PORT', default=587)
+EMAIL_USE_TLS = env('EMAIL_USE_TLS', default=True)
+EMAIL_HOST_USER = 'smartattendance64@gmail.com'
+#env('EMAIL_HOST_USER')
+EMAIL_HOST_PASSWORD = 'nzyqgajzftruczmf' #env('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL =  'smartattendance64@gmail.com' #env('DEFAULT_FROM_EMAIL')
+SITE_URL = env('SITE_URL', default='http://localhost:8000')

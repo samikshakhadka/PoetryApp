@@ -10,7 +10,10 @@ COPY pyproject.toml poetry.lock /app/
 RUN apt-get update \
     && apt-get -y install libpq-dev gcc \
     && pip install psycopg2
-    
+
+RUN apt-get update && \
+    apt-get install -y redis-tools 
+     
 RUN pip install --upgrade --no-cache-dir pip poetry \
     && poetry --version \
     # Configure to use system instead of virtualenvs
