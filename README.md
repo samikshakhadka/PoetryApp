@@ -164,5 +164,5 @@ Contributions are welcome! To contribute to PoetryApp:
 For questions or feedback, please contact:
 
 - **Name**: Samiksha Khadka
-- **Email**: [samikshakhadka0.com](mailto:your-email@example.com)
+- **Email**: [samikshakhadka0@gmail.com](mailto:your-email@example.com)
 
