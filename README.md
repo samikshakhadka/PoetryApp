@@ -1,5 +1,6 @@
 
-```markdown
+
+
 # PoetryApp
 
 PoetryApp is a Django-based web application that allows users to explore, create, and manage poetry. A key feature of this app is its integration with the Ollama Qwen2 model to summarize poems, providing insights and concise versions of the poetry content. The app also uses Celery for asynchronous task processing and Redis as the broker for Celery.
@@ -165,6 +166,3 @@ For questions or feedback, please contact:
 - **Name**: Samiksha Khadka
 - **Email**: [samikshakhadka0.com](mailto:your-email@example.com)
 
-```
-
-This README includes instructions for Docker setup, local setup using Poetry, Redis setup, Celery configuration, and integrating the Ollama Qwen2 model. 
