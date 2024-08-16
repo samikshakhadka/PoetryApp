@@ -1,4 +1,3 @@
-Great! Given that your app also uses Redis and Celery, you should include sections on setting up and configuring these components in the `README.md` file. Here's an updated version of the README that incorporates Redis and Celery:
 
 ```markdown
 # PoetryApp

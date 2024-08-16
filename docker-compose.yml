@@ -57,7 +57,7 @@ services:
   ollama:
     image: ollama/ollama  # Replace with the actual Ollama image name or configuration
     ports:
-      - "11434:11434"  # Make sure this matches the port Ollama is using
+      - "11435:11435"  # Make sure this matches the port Ollama is using
     restart: always
 
 volumes:
