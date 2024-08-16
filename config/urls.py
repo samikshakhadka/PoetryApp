@@ -40,6 +40,6 @@ urlpatterns = [
     path('redoc/', schema_view.with_ui('redoc', cache_timeout=0), name='schema-redoc'),
     path('api-auth/', include('rest_framework.urls')),
     path('admin/', admin.site.urls),
-    path('user/', include('apps.user.urls'))
-    #path('poem/', include('apps.poem.urls'))
+    path('user/', include('apps.user.urls')),
+    path('poem/', include('apps.poem.urls'))
 ]

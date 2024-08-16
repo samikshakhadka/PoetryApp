@@ -71,7 +71,11 @@ DJANGO_APPS = [
 
 THIRD_PARTY_APPS = [
     'rest_framework', 
+    'rest_framework.authtoken',
     'drf_yasg',
+    'django_filters',
+    'corsheaders',
+    
 ]
 
 LOCAL_APPS = [ 
@@ -80,6 +84,9 @@ LOCAL_APPS = [
 ]
 
 INSTALLED_APPS = DJANGO_APPS+LOCAL_APPS+THIRD_PARTY_APPS
+
+CORS_ALLOW_ALL_ORIGINS = True
+
 MIDDLEWARE = [
     'django.middleware.security.SecurityMiddleware',
     'django.contrib.sessions.middleware.SessionMiddleware',
@@ -88,6 +95,8 @@ MIDDLEWARE = [
     'django.contrib.auth.middleware.AuthenticationMiddleware',
     'django.contrib.messages.middleware.MessageMiddleware',
     'django.middleware.clickjacking.XFrameOptionsMiddleware',
+    'corsheaders.middleware.CorsMiddleware',
+    'django.middleware.common.CommonMiddleware',
 ]
 
 ROOT_URLCONF = 'config.urls'
@@ -111,13 +120,22 @@ TEMPLATES = [
 WSGI_APPLICATION = 'config.wsgi.application'
 
 
-# REST_FRAMEWORK = {
-#     # Use Django's standard `django.contrib.auth` permissions,
-#     # or allow read-only access for unauthenticated users.
-#     'DEFAULT_PERMISSION_CLASSES': [
-#         'rest_framework.permissions.DjangoModelPermissionsOrAnonReadOnly'
-#     ]
-# }
+REST_FRAMEWORK = {
+    'DEFAULT_AUTHENTICATION_CLASSES': (
+        
+        'rest_framework.authentication.TokenAuthentication',
+        'rest_framework.authentication.SessionAuthentication'
+        
+    ),
+    'DEFAUTL_PERMISSION_CLASSES': (
+        'rest_framework.permissions.IsAuthenticated',
+    ),
+    'DEFAULT_FILTER_BACKENDS': (
+        'django_filters.rest_framework.DjangoFilterBackend',
+        # ...
+    ),
+    
+}
 
 DATABASES = {
     'default': {
@@ -127,7 +145,7 @@ DATABASES = {
         
         'PASSWORD': env('DJANGO_DB_PASS'),
         
-        'HOST': env('DJANGO_DB_HOST'),
+        'HOST': 'localhost', #env('DJANGO_DB_HOST'),
         
         'PORT': env("DJANGO_DB_PORT"),
         
@@ -207,3 +225,5 @@ EMAIL_HOST_USER = 'smartattendance64@gmail.com'
 EMAIL_HOST_PASSWORD = 'nzyqgajzftruczmf' #env('EMAIL_HOST_PASSWORD')
 DEFAULT_FROM_EMAIL =  'smartattendance64@gmail.com' #env('DEFAULT_FROM_EMAIL')
 SITE_URL = env('SITE_URL', default='http://localhost:8000')
+
+OLLAMA_SERVICE_URL = 'http://localhost:11434'
