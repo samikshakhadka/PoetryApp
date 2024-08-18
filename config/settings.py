@@ -13,6 +13,7 @@ https://docs.djangoproject.com/en/5.0/ref/settings/
 # from pathlib import Path
 import environ 
 import os
+from pathlib import Path
 PROJECT_DIR = os.path.dirname(os.path.dirname(os.path.dirname(os.path.abspath(__file__))))
 ROOT_DIR = os.path.dirname(PROJECT_DIR)
 APPS_DIR = os.path.join(PROJECT_DIR, 'apps')
@@ -29,15 +30,15 @@ env = environ.Env(
     DJANGO_DB_HOST=str,
     DJANGO_DB_PORT=str,
     # EMAIL_HOST=str,
-    # EMAIL_PORT=int,
-    # EMAIL_USE_TLS=bool,
-    # EMAIL_HOST_USER=str,
-    # EMAIL_HOST_PASSWORD=str,
-    # DEFAULT_FROM_EMAIL=str,
-    # SITE_URL=str,
+    EMAIL_PORT=int,
+    EMAIL_USE_TLS=bool,
+    EMAIL_HOST_USER=str,
+    EMAIL_HOST_PASSWORD=str,
+    DEFAULT_FROM_EMAIL=str,
+    SITE_URL=str,
 )
 
-environ.Env.read_env()
+
 ENV_FILE = str(ENV_DIR.path('.env'))
 environ.Env.read_env(ENV_FILE)
 
@@ -145,7 +146,7 @@ DATABASES = {
         
         'PASSWORD': env('DJANGO_DB_PASS'),
         
-        'HOST': 'localhost', #env('DJANGO_DB_HOST'),
+        'HOST': env('DJANGO_DB_HOST'),
         
         'PORT': env("DJANGO_DB_PORT"),
         
@@ -215,15 +216,13 @@ CELERY_TIMEZONE = 'UTC'
 CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
 
 # Email settings
-# EMAIL_BACKEND = 'django.core.mail.backends.smtp.EmailBackend'
+
 EMAIL_HOST = 'smtp.gmail.com'
-#env('EMAIL_HOST', default='smtp.smartattendance64@gmail.com')
 EMAIL_PORT = env('EMAIL_PORT', default=587)
 EMAIL_USE_TLS = env('EMAIL_USE_TLS', default=True)
-EMAIL_HOST_USER = 'smartattendance64@gmail.com'
-#env('EMAIL_HOST_USER')
-EMAIL_HOST_PASSWORD = 'nzyqgajzftruczmf' #env('EMAIL_HOST_PASSWORD')
-DEFAULT_FROM_EMAIL =  'smartattendance64@gmail.com' #env('DEFAULT_FROM_EMAIL')
+EMAIL_HOST_USER = env('EMAIL_HOST_USER',default='smtp.smartattendance64@gmail.com')
+EMAIL_HOST_PASSWORD = env('EMAIL_HOST_PASSWORD')
+DEFAULT_FROM_EMAIL =  env('DEFAULT_FROM_EMAIL')
 SITE_URL = env('SITE_URL', default='http://localhost:8000')
 
-OLLAMA_SERVICE_URL = 'http://localhost:11434'
+OLLAMA_SERVICE_URL = 'http://localhost:11435'

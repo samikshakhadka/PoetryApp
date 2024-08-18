@@ -41,13 +41,8 @@ services:
       build:
         context: .
         dockerfile: Dockerfile
-      # image: madefire/chordtest
       command: ['celery','-A', 'config', 'worker', '--loglevel', 'info']
-      # environment:
-      #   - BROKER_URL=redis://redis:6379/0
-      #   - RESULT_BACKEND=redis://redis:6379/0
-      #   - CELERY_BROKER_CONNECTION_RETRY_ON_STARTUP = True
-      #   - C_FORCE_ROOT=true
+      
 
       depends_on:
         - redis
@@ -55,9 +50,9 @@ services:
       restart: always
 
   ollama:
-    image: ollama/ollama  # Replace with the actual Ollama image name or configuration
+    image: ollama/ollama  
     ports:
-      - "11435:11435"  # Make sure this matches the port Ollama is using
+      - "11435:11435"  
     restart: always
 
 volumes:
