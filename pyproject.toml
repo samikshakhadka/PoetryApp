@@ -21,6 +21,7 @@ langchain-community = "^0.2.12"
 pandas = "^2.2.2"
 django-cors-headers = "^4.4.0"
 setuptools = "^72.2.0"
+faker = "^27.4.0"
 
 
 [tool.poetry.group.dev.dependencies]
